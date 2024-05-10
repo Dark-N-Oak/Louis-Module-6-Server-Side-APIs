@@ -18,7 +18,7 @@ header h1{
     display: flex;
     align-items: center;
 }
-
+/* styles for search input and buttons. */
 aside {
     float: left;
     height: 100%;
@@ -60,6 +60,7 @@ aside section button[type="button"]{
     border: none;
 }
 
+/* styles for search history*/
 .history-box {
     display: flex;
     flex-direction: column;
@@ -91,6 +92,7 @@ aside section button:hover[type="button"] {
     color: white;
 }
 
+/* styles for current weather and 5 day forecast */
 main {
     position: relative;
     float: right;

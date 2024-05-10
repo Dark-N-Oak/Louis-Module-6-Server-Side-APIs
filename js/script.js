@@ -1,10 +1,12 @@
 document.addEventListener('DOMContentLoaded', () => {
+    // api key for openweatherapi.
     const apiKey = 'd9030f613241b3ee696bcfcc14d3cc87';
     const searchInput = document.querySelector('input[type="text"]');
     const submitBtn = document.querySelector('button[type="submit"]');
     const searchHistory = document.getElementById('search-history');
     const clearHistoryBtn = document.getElementById('clear-history');
 
+    // code for submit button.
     submitBtn.addEventListener('click', (event) => {
         event.preventDefault();
         const city = searchInput.value.trim();
@@ -13,12 +15,13 @@ document.addEventListener('DOMContentLoaded', () => {
             searchInput.value = '';
         }
     });
-
+    // code for clear history button.
     clearHistoryBtn.addEventListener('click', () => {
         localStorage.removeItem('searchHistory');
         searchHistory.innerHTML = '';
     });
 
+    // code for fetching weather data.
     function fetchWeatherData(city) {
         const apiUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=imperial`;
         
@@ -38,6 +41,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
     }
 
+    // code for displaying current weather.
     function displayWeather(data) {
         const currentWeatherSection = document.getElementById('current-weather');
         const currentWeather = data.list[0];
@@ -55,6 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
         `;
         currentWeatherSection.innerHTML = currentWeatherHTML;
 
+        // code for displaying 5 day forecast.
         const forecastSection = document.getElementById('forecast');
         forecastSection.innerHTML = ''; 
         const forecastHeading = document.createElement('h2');
@@ -76,6 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // code to add the search history to localstorage.
     function addToSearchHistory(city) {
         let history = JSON.parse(localStorage.getItem('searchHistory')) || [];
         if (!history.includes(city)) {
@@ -94,6 +100,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // code for search history to get from localstorage.
     function loadSearchHistory() {
         const history = JSON.parse(localStorage.getItem('searchHistory')) || [];
         history.forEach(city => {
